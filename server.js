@@ -1,0 +1,15 @@
+var connection = require("./config/connection");
+
+var express = require("express");
+var app = express();
+var PORT = process.env.PORT || 8080;
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+require("./app/routes/htmlRoutes")(app);
+require("./app/routes/apiRoutes")(app);
+
+//app.listen always goes at the end of your code
+app.listen(PORT, function() {
+  console.log("App listening on PORT:" + PORT);
+});
