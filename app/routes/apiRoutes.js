@@ -1,37 +1,38 @@
 //set up DB connection and requirements
+var connection = require("../../config/connection");
 
+module.exports = function(app) {
+  var path = require("path");
 
+  app.get();
+  app.post();
+  //declare functions for finding match
 
-//declare functions for finding match
+  // function findMatch(userData, friends){
+  //     const bestMatch = {
+  //         name: '',
+  //         photo: '',
+  //         friendDifference: Infinity
+  //     }
 
-function findMatch(userData, friends){
-    const bestMatch = {
-        name: '',
-        photo: '',
-        friendDifference: Infinity
-    }
+  // for(let i loop over friends){
+  //     totalDifference = 0;
+  //     currentFriend = friends[i];
 
+  //     for (let j loop over currentFriend.scores){
+  //         compare userData.scores[j] and currentFriend.scores[j];
+  //         totalDifference += Math.abs(parseInt(userScore) - parseInt(friendScore))
+  //     }
 
-for(let i loop over friends){
-    totalDifference = 0;
-    currentFriend = friends[i];
+  //     if(totalDifference <= bestMatch.friendDifference){
+  //         bestMatch = currentFriend
+  //     }
+  // }
 
-    for (let j loop over currentFriend.scores){
-        compare userData.scores[j] and currentFriend.scores[j];
-        totalDifference += Math.abs(parseInt(userScore) - parseInt(friendScore))
-    }
+  // return bestMatch;
 
-    if(totalDifference <= bestMatch.friendDifference){
-        bestMatch = currentFriend
-    }
-}
-
-return bestMatch;
-
-}
-
-module.exports = {1 get route for all profiles and 1 post route to add new profile}
+  // }
+};
+//module.exports = {1 get route for all profiles and 1 post route to add new profile}
 //when posting new user data also use data to find match
 //respond with the matched profile
-
-

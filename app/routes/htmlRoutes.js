@@ -1,3 +1,5 @@
+var connection = require("../../config/connection");
+
 var path = require("path");
 
 module.exports = function(app) {
