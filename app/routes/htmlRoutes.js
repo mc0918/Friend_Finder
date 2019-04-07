@@ -1,9 +1,25 @@
 var connection = require("../../config/connection");
-
-var path = require("path");
+var express = require("express");
 
 module.exports = function(app) {
-  app.get("../public/home", function(req, res) {});
-  app.get("../public/survey", function(req, res) {});
-  app.get("*", function(req, res) {});
+  var path = require("path");
+
+  function getQuestions() {
+    connection.query("SELECT * FROM questions", function(err, result) {
+      console.log(result);
+    });
+  }
+  getQuestions();
+
+  app.use(express.static(path.join(__dirname, "../public")));
+
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/home.html"));
+  });
+  app.get("/survey", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/survey.html"));
+  });
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/home.html"));
+  });
 };

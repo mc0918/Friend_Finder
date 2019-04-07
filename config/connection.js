@@ -1,10 +1,14 @@
+require("dotenv").config();
 var mysql = require("mysql");
+
+const pass = require("../password");
+const password = pass.password.id;
 
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "CHANGE PASSWORD TO ROOT OR USE .ENV",
+  password: password,
   database: "friend_finder_db"
 });
 

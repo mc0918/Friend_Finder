@@ -4,8 +4,9 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
-  app.get();
-  app.post();
+  //app.get();
+  //app.post();
+
   //declare functions for finding match
 
   // function findMatch(userData, friends){

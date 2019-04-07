@@ -1,4 +1,4 @@
-insert into profiles(name, image,description, scores)
+insert into profiles(name, image, description, scores)
 values("Chunk Biggums","https://i.redd.it/jc874nohao4z.jpg","Loving father of a wonderful, smaller version of myself. Chunk II always comes first. Always looking for new connections and new friends - just keep an open mind about cloning!","2,1,2,5,5,3,5,4,3,1"),
 ("Dante Reloj","https://i.imgur.com/3JOoTWR.jpg","IT expert and big DIY enthusiast. Looking for friends for one last job before we put this life of crime behind us.","5,4,1,1,2,1,4,2,1,3"),
 ("Liliputia Cardimom","https://i.redd.it/e6ixgjbils4z.jpg","First nun in history to intern at Google. Love the ocean.","2,1,4,5,5,3,2,5,5,1"),
