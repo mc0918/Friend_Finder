@@ -4,6 +4,15 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
+  function getQuestions() {
+    connection.query("SELECT * FROM questions", function(err, result) {
+      //console.log(result);
+      for (i = 0; i < result.length; i++) {
+        console.log(result[i].question + "\n");
+      }
+    });
+  }
+  getQuestions();
   //app.get();
   //app.post();
 
