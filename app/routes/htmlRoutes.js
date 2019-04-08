@@ -7,10 +7,10 @@ module.exports = function(app) {
   app.use(express.static(path.join(__dirname, "../public")));
 
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
+    res.sendFile(path.join(__dirname, "../views/home.html"));
   });
   app.get("/survey", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/survey.html"));
+    res.sendFile(path.join(__dirname, "../views/survey.html"));
   });
   // app.get("*", function(req, res) {
   //   res.sendFile(path.join(__dirname, "../public/home.html"));
