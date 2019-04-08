@@ -60,6 +60,7 @@ $(document).ready(function() {
   }
   // var slider = $("#calculatorSlider0");
   // var answer = $(".userAnswer");
+  //what if I add a square bracket after the "{" to make "survey" an object where everything is an array
   var survey = {
     name: "",
     image: "",
@@ -221,22 +222,23 @@ $(document).ready(function() {
 
   //console.log(survey);
   function sendScores() {
-    $("#submit").on("click", function() {
+    $("#submit").on("click", function(e) {
+      e.preventDefault();
       console.log("CLICK!");
       //AJAX
       var data = JSON.stringify(survey);
       console.log("PUBLIC DATA: ", data);
       $.ajax({
         type: "POST",
-        url: "/survey",
+        url: "/api/survey",
         dataType: "json",
-        data: { scores: data },
-        success: function(data) {
-          console.log("success! SENT DATA:", data);
-        },
-        error: function() {
-          console.log("Error!");
-        }
+        data: { scores: data }
+        // success: function(data) {
+        //   console.log("success! SENT DATA:", data);
+        // },
+        // error: function() {
+        //   console.log("Error!");
+        // }
       });
     });
   }

@@ -4,28 +4,39 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
-  //   app.get("/api/survey", function(req, res) {
-  //     console.log(res);
-  //     // res.format({
-  //     //   "application/json": function() {
-  //     //     //console.log(req.body.res);
-  //     //     res.send(req.body.scores);
-  //     //   }
-  //     // });
-  //   });
+  app.get("/api/survey", function(req, res) {
+    console.log(res);
+    res.send(req.body.scores);
+    //     // res.format({
+    //     //   "application/json": function() {
+    //     //     //console.log(req.body.res);
+    //     //     res.send(req.body.scores);
+    //     //   }
+    //     // });
+  });
 
-  app.post("/survey", function(req, res) {
+  app.post("/api/survey", function(req, res) {
     // res.format({
     //   "application/json": function() {
     //     console.log(req.body.res);
     //     //res.send(req.body.scores);
     //   }
     // });
-    res.json(req.body.scores);
-    //console.log(req.body.scores);
+    // res.json(req.body.scores);
+    var scores = req.body.scores;
+    var scoreParsed = JSON.parse(scores);
+    console.log(scoreParsed.form1.response);
+    console.log(scoreParsed);
+    for (var key in scoreParsed) {
+      //Only returns the string form1 not the object form1
+      if (key == "form1") {
+        // for (var formKey in key) {
+        console.log(key.response);
+        // }
+      }
+    }
     //res.send(req.body.scores);
   });
-  //app.post();
 
   //declare functions for finding match
 
