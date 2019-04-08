@@ -61,6 +61,9 @@ $(document).ready(function() {
   // var slider = $("#calculatorSlider0");
   // var answer = $(".userAnswer");
   var survey = {
+    name: "",
+    image: "",
+    description: "",
     form1: {
       active: true,
       response: 0
@@ -216,20 +219,27 @@ $(document).ready(function() {
     }
   });
 
-  //Put a submit button onClick to send survey and form data here
-  //AJAX
-  var data = JSON.stringify(survey);
-  $.ajax({
-    type: "POST",
-    url: "/api/survey",
-    dataType: "json",
-    data: { scores: data },
-    success: function(data) {
-      console.log("success!");
-    },
-    error: function() {
-      console.log("Error!");
-    }
-  });
+  //console.log(survey);
+  function sendScores() {
+    $("#submit").on("click", function() {
+      console.log("CLICK!");
+      //AJAX
+      var data = JSON.stringify(survey);
+      console.log("PUBLIC DATA: ", data);
+      $.ajax({
+        type: "POST",
+        url: "/survey",
+        dataType: "json",
+        data: { scores: data },
+        success: function(data) {
+          console.log("success! SENT DATA:", data);
+        },
+        error: function() {
+          console.log("Error!");
+        }
+      });
+    });
+  }
+  sendScores();
 });
 //});

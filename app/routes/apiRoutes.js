@@ -4,15 +4,26 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
-  //  console.log(questionArray);
+  //   app.get("/api/survey", function(req, res) {
+  //     console.log(res);
+  //     // res.format({
+  //     //   "application/json": function() {
+  //     //     //console.log(req.body.res);
+  //     //     res.send(req.body.scores);
+  //     //   }
+  //     // });
+  //   });
 
-  app.get("/api/survey", function(req, res) {
-    res.json(true);
-    console.log(survey);
-  });
-
-  app.post("/api/survey", function(req, res) {
-    res.json(true);
+  app.post("/survey", function(req, res) {
+    // res.format({
+    //   "application/json": function() {
+    //     console.log(req.body.res);
+    //     //res.send(req.body.scores);
+    //   }
+    // });
+    res.json(req.body.scores);
+    //console.log(req.body.scores);
+    //res.send(req.body.scores);
   });
   //app.post();
 
