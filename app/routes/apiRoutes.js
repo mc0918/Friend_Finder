@@ -4,16 +4,16 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
-  function getQuestions() {
-    connection.query("SELECT * FROM questions", function(err, result) {
-      //console.log(result);
-      for (i = 0; i < result.length; i++) {
-        console.log(result[i].question + "\n");
-      }
-    });
-  }
-  getQuestions();
-  //app.get();
+  //  console.log(questionArray);
+
+  app.get("/api/survey", function(req, res) {
+    res.json(true);
+    console.log(survey);
+  });
+
+  app.post("/api/survey", function(req, res) {
+    res.json(true);
+  });
   //app.post();
 
   //declare functions for finding match
