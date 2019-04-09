@@ -35,7 +35,9 @@ module.exports = function(app) {
     console.log(userScores);
     finalUserData.push(userScores);
     console.log(finalUserData);
-    //res.json(scoreParsed);
+
+    //It would be nice to show the data to know everything is working
+    res.json(finalUserData);
   });
 
   function sendScores(array) {
