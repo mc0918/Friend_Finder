@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   app.get("/api/survey", function(req, res) {
     console.log(res);
-    res.send(req.body.scores);
+    //res.json(req.body.scores);
   });
 
   app.post("/api/survey", function(req, res) {
@@ -37,7 +37,7 @@ module.exports = function(app) {
     console.log(finalUserData);
 
     //It would be nice to show the data to know everything is working
-    res.json(finalUserData);
+    //res.json(finalUserData);
   });
 
   function sendScores(array) {
