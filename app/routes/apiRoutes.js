@@ -7,37 +7,40 @@ module.exports = function(app) {
   app.get("/api/survey", function(req, res) {
     console.log(res);
     res.send(req.body.scores);
-    //     // res.format({
-    //     //   "application/json": function() {
-    //     //     //console.log(req.body.res);
-    //     //     res.send(req.body.scores);
-    //     //   }
-    //     // });
   });
 
   app.post("/api/survey", function(req, res) {
-    // res.format({
-    //   "application/json": function() {
-    //     console.log(req.body.res);
-    //     //res.send(req.body.scores);
-    //   }
-    // });
-    // res.json(req.body.scores);
+    var newUser = [];
+    var finalUserData = [];
+
+    finalUserData.push(req.body.scores.name);
+    finalUserData.push(req.body.scores.image);
+    finalUserData.push(req.body.scores.description);
+
     var scores = req.body.scores;
     var scoreParsed = JSON.parse(scores);
-    console.log(scoreParsed.form1.response);
-    console.log(scoreParsed);
+
     for (var key in scoreParsed) {
-      //Only returns the string form1 not the object form1
-      if (key == "form1") {
-        // for (var formKey in key) {
-        console.log(key.response);
-        // }
+      for (i = 0; i < 10; i++) {
+        if (key == "form" + [i]) {
+          for (var formKey in scoreParsed[key]) {
+            if (formKey === "response") {
+              newUser.push(scoreParsed[key][formKey]);
+              var userScores = newUser.join();
+            }
+          }
+        }
       }
     }
-    //res.send(req.body.scores);
+    console.log(userScores);
+    finalUserData.push(userScores);
+    console.log(finalUserData);
+    //res.json(scoreParsed);
   });
 
+  function sendScores(array) {
+    query = "UPDATE profiles SET "; //need name, image, description, column etc
+  }
   //declare functions for finding match
 
   // function findMatch(userData, friends){
