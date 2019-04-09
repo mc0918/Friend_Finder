@@ -37,7 +37,7 @@ module.exports = function(app) {
     console.log(finalUserData);
 
     //It would be nice to show the data to know everything is working
-    //res.json(finalUserData);
+    res.json({ finalUserData });
   });
 
   function sendScores(array) {

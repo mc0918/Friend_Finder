@@ -232,13 +232,14 @@ $(document).ready(function() {
         type: "POST",
         url: "/api/survey",
         dataType: "json",
-        data: { scores: data }
-        // success: function(data) {
-        //   console.log("success! SENT DATA:", data);
-        // },
-        // error: function() {
-        //   console.log("Error!");
-        // }
+        data: { scores: data },
+        success: function(data) {
+          console.log("success! SENT DATA:", data);
+          //return data??
+        },
+        error: function() {
+          console.log("Error!");
+        }
       });
     });
   }
