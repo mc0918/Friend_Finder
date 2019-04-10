@@ -37,7 +37,9 @@ $(document).ready(function() {
     var h3 = $("<h3>");
     var span = $("<span>").html("Your Answer");
     var h2 = $("<h2>");
-    var strong = $("<strong>").attr("class", "userAnswer" + [i]);
+    var strong = $("<strong>")
+      .attr("class", "userAnswer" + [i])
+      .html("0");
 
     h2.append(strong);
     h3.append(span);
@@ -246,6 +248,12 @@ $(document).ready(function() {
         data: { scores: data },
         success: function(data) {
           console.log("success! SENT DATA:", data);
+          // return data;
+          //===============================================
+          $.get("/api/survey", function(data) {
+            console.log("HELLO?", data);
+          });
+          //===============================================
         },
         error: function() {
           console.log("Error!");
@@ -255,4 +263,3 @@ $(document).ready(function() {
   }
   sendScores();
 });
-//});

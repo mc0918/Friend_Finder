@@ -5,8 +5,13 @@ module.exports = function(app) {
   var path = require("path");
 
   app.get("/api/survey", function(req, res) {
-    console.log(res);
-    //res.json(req.body.scores);
+    //So this is returning nothing but a null object thing...
+    //Maybe the post method should only add a new user to the database
+    //and the code for finding a match should be here? Change up the route?
+
+    //Do I even need to have a GET for a route only POST front/back ends are talking on?
+    console.log("GEEEEEETTT", req);
+    //console.log("GET", res);
   });
 
   app.post("/api/survey", function(req, res) {
@@ -36,7 +41,9 @@ module.exports = function(app) {
     finalUserData.push(userScores);
     console.log(finalUserData);
 
-    //sendScores(finalUserData);
+    //insertUser(finalUserData);
+
+    //Right now if two potential matches have the same friendDifference will only return the first one
     findMatch(finalUserData);
 
     //It would be nice to show the data to know everything is working
@@ -44,7 +51,7 @@ module.exports = function(app) {
   });
 
   //===========================FUNCTIONS=====================
-  function sendScores(array) {
+  function insertUser(array) {
     query =
       "INSERT INTO profiles (name, image, description, scores) VALUES (?,?,?,?);";
     connection.query(query, [array[0], array[1], array[2], array[3]], function(
@@ -75,7 +82,6 @@ module.exports = function(app) {
         var friendScoreArray = [];
         var friendScoreTotal = [];
         var userScoreTotal = [];
-        //var totalDifference = Infinity;
         var currentFriend = result[i].name;
 
         var friendFinal = sumFriendScores(
@@ -103,8 +109,6 @@ module.exports = function(app) {
         //     "User total: " +
         //     userFinal
         // );
-
-        //console.log(result[i].scores + "\n");
       }
       console.log(bestMatch);
       return bestMatch;
@@ -133,24 +137,4 @@ module.exports = function(app) {
     }
     return userTotal;
   };
-  // for(let i loop over friends){
-  //     totalDifference = 0;
-  //     currentFriend = friends[i];
-
-  //     for (let j loop over currentFriend.scores){
-  //         compare userData.scores[j] and currentFriend.scores[j];
-  //         totalDifference += Math.abs(parseInt(userScore) - parseInt(friendScore))
-  //     }
-
-  //     if(totalDifference <= bestMatch.friendDifference){
-  //         bestMatch = currentFriend
-  //     }
-  // }
-
-  // return bestMatch;
-
-  // }
 };
-//module.exports = {1 get route for all profiles and 1 post route to add new profile}
-//when posting new user data also use data to find match
-//respond with the matched profile
