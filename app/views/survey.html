@@ -19,16 +19,33 @@
       <h1>Survey</h1>
     </div>
     <div class="container">
-      <form>
-        <!-- ask for name and description -->
+      <form role="form">
+        <div class="form-group">
+          <label for="user-name">Name</label>
+          <input type="text" class="form-control" id="user-name" />
+        </div>
+      </form>
+      <form role="form">
+        <div class="form-group">
+          <label for="user-image">Image (insert a link)</label>
+          <input type="text" class="form-control" id="user-image" />
+        </div>
+      </form>
+      <form role="form">
+        <div class="form-group">
+          <label for="user-description">Description</label>
+          <input type="text" class="form-control" id="user-description" />
+        </div>
       </form>
     </div>
     <div class="container" id="questions"></div>
-    <a href="/api/survey"
-      ><button class="btn btn-danger btn-lg" id="submit">
-        <span class="fa fa-eye"></span>Submit!
-      </button></a
-    >
+    <div class="button-wrapper" style="text-align: center">
+      <a href="/api/survey"
+        ><button class="btn btn-danger btn-lg text-center" id="submit">
+          <span class="fa fa-eye"></span>Submit!
+        </button></a
+      >
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"

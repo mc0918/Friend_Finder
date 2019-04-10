@@ -225,6 +225,17 @@ $(document).ready(function() {
     $("#submit").on("click", function(e) {
       e.preventDefault();
       console.log("CLICK!");
+
+      survey.name = $("#user-name")
+        .val()
+        .trim();
+      survey.image = $("#user-image")
+        .val()
+        .trim();
+      survey.description = $("#user-description")
+        .val()
+        .trim();
+
       //AJAX
       var data = JSON.stringify(survey);
       console.log("PUBLIC DATA: ", data);
@@ -235,7 +246,6 @@ $(document).ready(function() {
         data: { scores: data },
         success: function(data) {
           console.log("success! SENT DATA:", data);
-          //return data??
         },
         error: function() {
           console.log("Error!");
