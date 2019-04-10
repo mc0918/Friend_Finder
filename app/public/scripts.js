@@ -245,20 +245,25 @@ $(document).ready(function() {
         type: "POST",
         url: "/api/survey",
         dataType: "json",
-        data: { scores: data },
-        success: function(data) {
-          console.log("success! SENT DATA:", data);
-          // return data;
-          //===============================================
-          $.get("/api/survey", function(data) {
-            console.log("HELLO?", data);
-          });
-          //===============================================
-        },
-        error: function() {
-          console.log("Error!");
-        }
+        data: { scores: data }
+        // success: function(data) {
+        //   console.log("success! SENT DATA:", data);
+        //   // return data;
+        // },
+        // error: function() {
+        //   console.log("Error!");
+        // }
+      }).then(function(result) {
+        console.log(result);
       });
+      //Get match here, so we need data from /api/survey... but we're also sending data along api/survey?
+      // $.ajax({
+      //   type: "GET",
+      //   url: "/api/survey",
+      //   dataType: "json",
+      //   data: { scores: data },
+      //   success: function(data) {}
+      // });
     });
   }
   sendScores();

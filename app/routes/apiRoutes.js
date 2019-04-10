@@ -4,14 +4,11 @@ var connection = require("../../config/connection");
 module.exports = function(app) {
   var path = require("path");
 
-  app.get("/api/survey", function(req, res) {
-    //So this is returning nothing but a null object thing...
-    //Maybe the post method should only add a new user to the database
-    //and the code for finding a match should be here? Change up the route?
-
-    //Do I even need to have a GET for a route only POST front/back ends are talking on?
-    console.log("GEEEEEETTT", req);
-    //console.log("GET", res);
+  app.get("/api/users", function(req, res) {
+    query = "select * from profiles";
+    connection.query(query, function(err, result) {
+      res.json(result);
+    });
   });
 
   app.post("/api/survey", function(req, res) {
@@ -19,6 +16,8 @@ module.exports = function(app) {
     var finalUserData = [];
 
     var scores = req.body.scores;
+    console.log(scores);
+
     var scoreParsed = JSON.parse(scores);
 
     finalUserData.push(scoreParsed.name);
@@ -44,10 +43,12 @@ module.exports = function(app) {
     //insertUser(finalUserData);
 
     //Right now if two potential matches have the same friendDifference will only return the first one
-    findMatch(finalUserData);
+    findMatch(finalUserData, function(data) {
+      console.log("LOOK HERE", data);
+      res.json(data);
+    });
 
-    //It would be nice to show the data to know everything is working
-    res.json({ finalUserData });
+    console.log(finalUserData);
   });
 
   //===========================FUNCTIONS=====================
@@ -60,12 +61,11 @@ module.exports = function(app) {
     ) {
       if (err) throw err;
       console.log("added to database");
-      //res.redirect("/")
     });
   }
   //declare functions for finding match
-
-  function findMatch(userData) {
+  function findMatch(userData, cb) {
+    console.log("AAAA", userData);
     const bestMatch = {
       name: "",
       photo: "",
@@ -76,7 +76,6 @@ module.exports = function(app) {
       "SELECT * FROM profiles WHERE id < (SELECT MAX(id) FROM profiles);";
     connection.query(query, function(err, result) {
       if (err) throw err;
-      //console.log(result);
 
       for (i = 0; i < result.length; i++) {
         var friendScoreArray = [];
@@ -111,7 +110,7 @@ module.exports = function(app) {
         // );
       }
       console.log(bestMatch);
-      return bestMatch;
+      return cb(bestMatch);
     });
   }
 
@@ -128,6 +127,7 @@ module.exports = function(app) {
   };
 
   var sumUserScores = function(userData, userArray) {
+    console.log("BBBBB", userData);
     var userNum = userData[3].split(",");
     for (k = 0; k < userNum.length; k++) {
       userArray.push(parseInt(userNum[k]));
