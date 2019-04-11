@@ -246,25 +246,85 @@ $(document).ready(function() {
         url: "/api/survey",
         dataType: "json",
         data: { scores: data }
-        // success: function(data) {
-        //   console.log("success! SENT DATA:", data);
-        //   // return data;
-        // },
-        // error: function() {
-        //   console.log("Error!");
-        // }
       }).then(function(result) {
         console.log(result);
+
+        // Add modal with results
+        modal.open({
+          content:
+            "Your Match: \n" +
+            result.name +
+            "\n About: " +
+            result.description +
+            "\n Match Score: " +
+            result.friendDifference +
+            "\n Photo: " +
+            "<img src='" +
+            result.photo +
+            "' alt='your match'>"
+        });
       });
-      //Get match here, so we need data from /api/survey... but we're also sending data along api/survey?
-      // $.ajax({
-      //   type: "GET",
-      //   url: "/api/survey",
-      //   dataType: "json",
-      //   data: { scores: data },
-      //   success: function(data) {}
-      // });
     });
   }
   sendScores();
 });
+
+var modal = (function() {
+  var method = {},
+    $overlay = $('<div id="overlay"></div>');
+  $modal = $('<div id="modal"></div>');
+  $content = $('<div id="content"></div>');
+  $close = $('<a id="close" href="#">close</a>');
+
+  $modal.hide();
+  $overlay.hide();
+  $modal.append($content, $close);
+  // Append the HTML
+
+  // Center the modal in the viewport
+  method.center = function() {
+    var top, left;
+
+    top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+    left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
+
+    $modal.css({
+      top: top + $(window).scrollTop(),
+      left: left + $(window).scrollLeft()
+    });
+  };
+
+  // Open the modal
+  method.open = function(settings) {
+    $content.empty().append(settings.content);
+
+    $modal.css({
+      width: settings.width || "auto",
+      height: settings.height || "auto"
+    });
+
+    method.center();
+
+    $(window).bind("resize.modal", method.center);
+
+    $modal.show();
+    $overlay.show();
+  };
+
+  // Close the modal
+  method.close = function() {
+    $modal.hide();
+    $overlay.hide();
+    $content.empty();
+    $(window).unbind("resize.modal");
+  };
+
+  // $close.click(function(e) {
+  //   e.preventDefault();
+  //   method.close();
+  // });
+
+  $("body").append($overlay, $modal);
+
+  return method;
+})();
